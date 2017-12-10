@@ -1,5 +1,5 @@
 package com.askquickly.memcache;
-
+// stored in memory, very fast, available only while app is running
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import anywheresoftware.b4a.BA.ShortName;
 import anywheresoftware.b4a.BA.Version;
 import anywheresoftware.b4a.BA.Author;
 
-@Author("MemCache wrapped By J")
+@Author("MemCache")
 @Version(0.01f)
 @ShortName("memcache")
 
