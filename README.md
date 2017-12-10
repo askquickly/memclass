@@ -2,9 +2,7 @@
 
 B4A MemCacher
 
-A very fast in memory storage and available only while app is running
-
-Put byte, string or anything you wish to store into memory:
+Memcached is an in-memory key-value store for small chunks of arbitrary data (strings, objects) 
 <p>
 <pre>
 memcacher.putstrings("mem", "a big test")
