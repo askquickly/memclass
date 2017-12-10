@@ -11,13 +11,13 @@ import anywheresoftware.b4a.BA.Author;
 
 @Author("MemCache")
 @Version(0.01f)
-@ShortName("memcache")
+@ShortName("Memcache")
 
-public class memcache implements StorageInterface
+public class Memcache implements StorageInterface
 volatile protected Map<String, Object> map;
     volatile protected long lastModified;
 
-    public StorageMemcache()
+    public Memcache()
     {
         map = getMap();
         lastModified = 0;
