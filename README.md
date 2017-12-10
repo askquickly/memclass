@@ -1,0 +1,2 @@
+# memclass
+B4AMemcache
