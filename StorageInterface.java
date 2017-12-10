@@ -1,5 +1,5 @@
-package com.askquickly.memcache;
-
+package com.askquickly;
+import anywheresoftware.b4a.BA.Hide;
 public interface StorageInterface
 {
     public boolean containsKey(String key);
@@ -8,19 +8,19 @@ public interface StorageInterface
 
     public void clear(String key);
 
-    public void put(String key, byte value);
+    public void putByte(String key, byte value);
 
-    public void put(String key, int value);
+    public void putInt(String key, int value);
 
-    public void put(String key, long value);
+    public void putLong(String key, long value);
 
-    public void put(String key, boolean value);
+    public void putBoolean(String key, boolean value);
 
-    public void put(String key, float value);
+    public void putFloat(String key, float value);
 
-    public void put(String key, double value);
+    public void putDouble(String key, double value);
 
-    public void put(String key, String value);
+    public void putstrings(String key, String value);
 
     public Object get(String key);
 
