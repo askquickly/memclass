@@ -1,4 +1,4 @@
-package com.askquickly.memcache;
+package com.askquickly;
 // stored in memory, very fast, available only while app is running
 import java.util.Calendar;
 import java.util.HashMap;
@@ -8,21 +8,23 @@ import anywheresoftware.b4a.BA;
 import anywheresoftware.b4a.BA.ShortName;
 import anywheresoftware.b4a.BA.Version;
 import anywheresoftware.b4a.BA.Author;
+import anywheresoftware.b4a.BA.Hide;
 
-@Author("MemCache")
+@Author("memCache")
 @Version(0.01f)
-@ShortName("Memcache")
-
-public class Memcache implements StorageInterface
+@ShortName("memcacher")
+public class memcacher implements StorageInterface {
+@Hide
 volatile protected Map<String, Object> map;
+@Hide
     volatile protected long lastModified;
 
-    public Memcache()
+    public memcacher()
     {
         map = getMap();
-        lastModified = 0;
+       lastModified = 0;
     }
-
+@Hide
     protected Map<String, Object> getMap()
     {
         return new HashMap<String, Object>();
@@ -138,43 +140,41 @@ volatile protected Map<String, Object> map;
         return null;
     }
 
-    synchronized public void put(String key, byte value)
+    synchronized public void putByte(String key, byte value)
+    {
+        map.put(key, value);
+        updateLastModified();
+    }
+    synchronized public void putInt(String key, int value)
     {
         map.put(key, value);
         updateLastModified();
     }
 
-    synchronized public void put(String key, int value)
+    synchronized public void putLong(String key, long value)
     {
         map.put(key, value);
         updateLastModified();
     }
 
-    synchronized public void put(String key, long value)
+    synchronized public void putBoolean(String key, boolean value)
     {
         map.put(key, value);
         updateLastModified();
     }
 
-    synchronized public void put(String key, boolean value)
+    synchronized public void putFloat(String key, float value)
     {
         map.put(key, value);
         updateLastModified();
     }
 
-    synchronized public void put(String key, float value)
+    synchronized public void putDouble(String key, double value)
     {
         map.put(key, value);
         updateLastModified();
     }
-
-    synchronized public void put(String key, double value)
-    {
-        map.put(key, value);
-        updateLastModified();
-    }
-
-    synchronized public void put(String key, String value)
+    synchronized public void putstrings(String key, String value)
     {
         map.put(key, value);
         updateLastModified();
@@ -184,7 +184,6 @@ volatile protected Map<String, Object> map;
     {
         lastModified = Calendar.getInstance().getTimeInMillis();
     }
-
     synchronized public long getLastModified()
     {
         return lastModified;
