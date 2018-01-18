@@ -3,22 +3,31 @@ package com.askquickly;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import anywheresoftware.b4a.BA;
 import anywheresoftware.b4a.BA.ShortName;
 import anywheresoftware.b4a.BA.Version;
 import anywheresoftware.b4a.BA.Author;
 import anywheresoftware.b4a.BA.Hide;
+import anywheresoftware.b4a.BA.Events;
 
 @Author("memCache")
 @Version(0.01f)
 @ShortName("memcacher")
+@Events(values={"expired (response As String)"})
 public class memcacher implements StorageInterface {
+	private static String eventName;
+	private static BA ba;
 @Hide
 volatile protected Map<String, Object> map;
 @Hide
     volatile protected long lastModified;
-
+public void Initialize(final BA ba, String evname) {
+		this.ba = ba;
+		this.eventName = evname.toLowerCase(BA.cul);
+	}
     public memcacher()
     {
         map = getMap();
@@ -187,5 +196,23 @@ volatile protected Map<String, Object> map;
     synchronized public long getLastModified()
     {
         return lastModified;
+    }
+	 synchronized public void cacheExpire(long time)
+    {
+		Timer timerObj = new Timer();
+		TimerTask timerTaskObj = new TimerTask() {
+        public void run() {
+          if(ba.subExists(memcacher.eventName + "_expired"))
+            {
+		//map.remove(Keyy); // do a test here
+		ba.raiseEvent(this,memcacher.eventName + "_expired", "Memory wipe");
+			}
+			else
+			{
+				BA.LogError("event sub does not exist: " + memcacher.eventName);
+			}
+        }
+    };
+    timerObj.schedule(timerTaskObj, 0, time);
     }
 }
